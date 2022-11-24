@@ -3,20 +3,19 @@ const index = 0;
 let textPosition = 0;
 let flag = true;
 const button = document.getElementById('Infobutton');
+const openPopup = document.getElementsByClassName('open-popup')[0];
+const popupContainer = document.getElementsByClassName('popup-container')[0];
+const closeButton = document.getElementsByClassName('close-button')[0];
 
 document.getElementById('greeting-text').textContent = 'Гиндуллина Динара Рафисовна'; // просто было интересно так вставить текст
 
-$('#infoButton').click(() => {
-  window.location.href = 'index.html';
-  return false;
-});
 function typewriter() {
   if (flag) {
     quoteArray[index] += ' ';
     flag = false;
   }
-
-  document.querySelector('#quote').innerHTML = `${quoteArray[index].substring(0, textPosition)}<span>\u25AE</span>`;
+  const text = quoteArray[index].substring(0, textPosition);
+  document.querySelector('#quote').innerHTML = `${text}<span>\u25AE</span>`;
   textPosition += 1;
   if (textPosition !== quoteArray[index].length) {
     setTimeout(() => {
@@ -32,11 +31,11 @@ function typewriter() {
 }
 
 function popup() {
-  $('.open-popup').on('click', () => {
-    $('.popup-container').css('display', 'flex');
+  openPopup.addEventListener('click', () => {
+    popupContainer.style.display = 'flex';
   });
-  $('.close-button').on('click', () => {
-    $('.popup-container').css('display', 'none');
+  closeButton.addEventListener('click', () => {
+    popupContainer.style.display = 'none';
   });
 }
 
